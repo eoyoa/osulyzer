@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+	<body>
+		<h1>osulyzer</h1>
+		<h2>an app that takes in osu!standard data from the osu! api and does interesting things with it</h2>
+		<br>
+		<br>
+		<p id="info">enter your user id, then click either button to see interesting stats!<br>
+			<br>- rankup! -
+			<br>tells you how many top plays of a certain pp value you will need to make in order to reach a four digit rank (>#10,000)<br>
+			<br>- active users stats -
+			<br>tells you the total number of active users (users that have submitted a play in the last month) and what percent you place.
+		</p>
+		<br>
+		<br>
+		<div>
+			<label for="user">user id:</label>
+			<input type="text" id="user"/>
+		</div>
+		<br>
+		<br>
+		<div>
+			<button id="rankup" type="button">rankup!</button>
+			<button id="active-users" type="button">active users stats</button>
+		</div>
+		<br>
+		<br>
+		<p id="output"></p>
+		<script src="js/index.js"></script>
+	</body>
+</html>

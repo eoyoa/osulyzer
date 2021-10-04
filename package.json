@@ -1,0 +1,19 @@
+{
+  "name": "osulyzer",
+  "version": "1.0.0-alpha",
+  "description": "Analyze your osu! profile.",
+  "main": "./src/index.ts",
+  "author": "Julian Kim",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^15.3.0",
+    "@types/node-fetch": "^2.5.10",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.6",
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {}
+}

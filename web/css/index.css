@@ -1,0 +1,12 @@
+* {
+	font-family: "Arial";
+	margin: auto;
+	text-align: center;
+}
+
+p#info {
+	width: auto;
+	padding: 20px;
+	color: white;
+	background-color: gray;
+}
