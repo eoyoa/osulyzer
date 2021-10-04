@@ -29,8 +29,6 @@ import fs from "fs/promises";
 		const currentPp = user.statistics.pp;
 		const desiredPp = (await client.getRanking("osu", "performance", 200)).ranking[48].pp;
 
-		console.log(solve(topPp, currentPp, 5033));
-
 		const solution = solve(topPp, currentPp, desiredPp);
 		const [plays, ppValue] = solution
 
@@ -62,7 +60,7 @@ import fs from "fs/promises";
 
 		const rank = (await client.getUser(id)).statistics.global_rank;
 
-		res.send(`there are currently ${activeUsers} total active users.<br>you are in the top ${(rank/activeUsers).toFixed(activeUsers.toString().length)}% (rank #${rank}/${activeUsers})`);
+		res.send(`there are currently ${activeUsers} total active users.<br>you are in the top ${((rank/activeUsers) * 100).toFixed(2)}% (rank #${rank}/${activeUsers})`);
 	});
 
 	app.listen(port, () => {

@@ -1,21 +1,19 @@
 const rankup = document.getElementById("rankup");
 const activeUsers = document.getElementById("active-users");
 
-let output = "";
 rankup.onclick = () => doClick("/rankup/");
 activeUsers.onclick = () => doClick("/active-users/");
 
 function doClick(endpoint) {
 	const userId = document.getElementById("user").value;
 
+	updateScreen("loading...");
 	if (isNaN(userId) || userId === "") {
-		output = "that's not a valid user!";
-		updateScreen();
+		updateScreen("that's not a valid user!");
 	} else fetch(endpoint + userId).then(async res => {
-			output = await res.text();
-			updateScreen();
+			updateScreen(await res.text());
 		});
 }
-function updateScreen() {
-	document.getElementById("output").innerHTML = output;
+function updateScreen(text) {
+	document.getElementById("output").innerHTML = text;
 }
