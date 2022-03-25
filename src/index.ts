@@ -26,14 +26,14 @@ import fs from "fs/promises";
 		
 		const topPp = (await client.getUserScores(id, "best", { limit: 1 }))[0].pp;
 		const user = await client.getUser(id);
-		const currentPp = user.statistics.pp;
-		const desiredPp = (await client.getRanking("osu", "performance", 200)).ranking[48].pp;
+		const currentPp = user["statistics"].pp;
+		const desiredPp = (await client.getRanking("osu", "performance", 200))["ranking"][48].pp;
 
 		const solution = solve(topPp, currentPp, desiredPp);
 		const [plays, ppValue] = solution
 
 		if (plays === 0) {
-			res.send(`congrats! you've already achieved a four digit rank!<br>you are currently rank #${user.statistics.global_rank}.`);
+			res.send(`congrats! you've already achieved a four digit rank!<br>you are currently rank #${user["statistics"].global_rank}.`);
 		} else if (plays <= 5) {
 			res.send(`you're close to a four digit rank!<br>make ${plays} plays of ${ppValue} pp value!`);
 		} else {
@@ -46,19 +46,19 @@ import fs from "fs/promises";
 
 		let activeUsers = 0;
 		let countries = await client.getRanking("osu", "country");
-		const total = countries.total;
+		const total = countries["total"];
 		
 		let increment = 50;
 		let j = 2;
 		for (let i = 0; i < total; i += increment) {
-			increment = countries.ranking.length;
-			for (const country of countries.ranking) {
+			increment = countries["ranking"].length;
+			for (const country of countries["ranking"]) {
 				activeUsers += country.active_users;
 			}
 			countries = await client.getRanking("osu", "country", j++);
 		}
 
-		const rank = (await client.getUser(id)).statistics.global_rank;
+		const rank = (await client.getUser(id))["statistics"].global_rank;
 
 		res.send(`there are currently ${activeUsers} total active users.<br>you are in the top ${((rank/activeUsers) * 100).toFixed(2)}% (rank #${rank}/${activeUsers})`);
 	});

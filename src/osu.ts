@@ -3,10 +3,16 @@
 // querystring for encoding objects into queries
 // osu! api for data
 
-import fetch from "node-fetch";
+import fetch, { Response } from "node-fetch";
 import qs from "querystring";
 
 const base = "https://osu.ppy.sh/api/v2";
+
+interface OAuthResponse {
+	token_type: string;
+	expires_in: number;
+	access_token: string;
+}
 
 export class ApiClient {
 	token: string = "";
@@ -29,9 +35,10 @@ export class ApiClient {
 		.then(response => {
 			console.log("logged in!");
 			return response.json();
+		}).then((json: OAuthResponse) => {
+			this.token = json.access_token;
 		});
 		
-		this.token = token.access_token;
 	}
 	async getUserScores(user: string, type: string, queries?: { limit?: number, offset?: number} ): Promise<any> {
 		const headers = {
