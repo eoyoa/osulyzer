@@ -3,7 +3,7 @@
 // fs (built-in library from node.js) for reading file input
 // osu! api for data
 import express from "express";
-import * as config from "../config.json";
+// import * as config from "../config.json";
 import { ApiClient } from "./osu";
 import fs from "fs/promises";
 
@@ -12,7 +12,11 @@ import fs from "fs/promises";
 	const port = 3000;
 
 	const client = new ApiClient();
-	await client.login(config.client_id, config.client_secret);
+	// @ts-ignore
+	const config = await import("../config.json")
+		.then(json => { return json })
+		.catch(error => { return process.env });
+	await client.login(config.client_id as number, config.client_secret as string);
 
 	app.use("/", express.static("web"));
 
